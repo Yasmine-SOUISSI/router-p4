@@ -1,59 +1,59 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct, deleteProduct } from "../Redux/actions/productsActions";
+import { addMovie, deleteMovie } from "../Redux/actions/moviesActions";
 
 
-const Products = () => {
-    const productsList = useSelector(state => state.productsReducer.products)
-    console.log(productsList);
+const Movies = () => {
+    const moviesList = useSelector(state => state.moviesReducer.movies)
+    console.log(moviesList);
     const dispatch = useDispatch();
     // OLD WAY WITHOUT REDUX
-    // const [productsList, setProductsList] = useState(products);
+    // const [moviesList, setMoviesList] = useState(movies);
     const [search, setSearch] = useState("");
-    const [newProduct, setNewProduct] = useState({
+    const [newMovie, setNewMovie] = useState({
         name: "",
         description: "",
     });
 
     const handleChange = (e) => {
-        setNewProduct({
-            ...newProduct,
+        setNewMovie({
+            ...newMovie,
             [e.target.name]: e.target.value,
         });
     };
     // OLD WAY WITHOUT REDUX
-    // const addProduct = (e) => {
+    // const addMovie = (e) => {
     //     e.preventDefault();
-    //     setProductsList([...productsList, newProduct]);
+    //     setMoviesList([...moviesList, newMovie]);
     // };
-    const filterData = productsList.filter((product) => {
-        return product.name.toLowerCase().includes(search.toLowerCase());
+    const filterData = moviesList.filter((movie) => {
+        return movie.name.toLowerCase().includes(search.toLowerCase());
     });
     return (
         <div>
             <input type="search" placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {filterData.map((product) => (
+            {filterData.map((movie) => (
 
-                <div key={product.id}>
+                <div key={movie.id}>
                     <button
-                        onClick={() => dispatch(deleteProduct(product.id))}
+                        onClick={() => dispatch(deleteMovie(movie.id))}
                     >x</button>
-                    <h1>{product.name}</h1>
-                    <p>{product.description}</p>
-                    <Link to={`/products/${product.id}`}>
+                    <h1>{movie.name}</h1>
+                    <p>{movie.description}</p>
+                    <Link to={`/movies/${movie.id}`}>
                         <button>View</button>
                     </Link>
                 </div>
 
             ))
             }
-            <form /*onSubmit={(e) => addProduct(e)} */
+            <form /*onSubmit={(e) => addMovie(e)} */
                 onSubmit={(e) => {
                     e.preventDefault();
-                    dispatch(addProduct(newProduct));
+                    dispatch(addMovie(newMovie));
                 }}
             >
                 <input type="text" name="name"
@@ -64,11 +64,11 @@ const Products = () => {
                 />
                 <button
                     type="submit"
-                >Add Product</button>
+                >Add Movie</button>
 
             </form>
         </div>
     );
 };
 
-export default Products;
+export default Movies;

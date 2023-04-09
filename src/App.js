@@ -5,6 +5,7 @@ import NavBar from './Components/NavBar';
 import Home from './Pages/Home';
 import Products from './Pages/Products';
 import ProductDetails from './Pages/ProductDetails';
+import Movies from './Pages/Movies';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/movies" element={<Movies />
+        } />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
 
